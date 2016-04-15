@@ -1,7 +1,7 @@
 Package.describe({
   name: "wiserweb:geolocation",
   summary: "Provides reactive geolocation with configurable options for desktop and mobile.",
-  version: "1.4.0"  
+  version: "1.4.1"
 });
 
 Cordova.depends({

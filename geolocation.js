@@ -18,24 +18,25 @@ var onPosition = function (newLocation) {
   error.set(null);
 };
 
-var startWatchingPosition = function (option) {
+var startWatchingPosition = function (options) {
   if (! watchingPosition && navigator.geolocation) {
 
     //default options
-    var options = {
+    var default_options = {
       enableHighAccuracy: true,
       maximumAge: 4000,
       timeout: 12000
     };
 
-    //set values based on passed parameters and defaults
-    options.enableHighAccuracy = option.hasOwnProperty('enableHighAccuracy') ? option.enableHighAccuracy : true;
-    options.maximumAge = option.hasOwnProperty('maximumAge') ? option.maximumAge : 4000;
-    options.timeout = option.hasOwnProperty('timeout') ? option.timeout : 12000;
+    options = options || {};
+    for (var opt in default_options)
+      if (default_options.hasOwnProperty(opt) && !options.hasOwnProperty(opt))
+        options[opt] = default_options[opt];
 
     navigator.geolocation.watchPosition(onPosition, onError, options);
     watchingPosition = true;
   }
+
 };
 
 // exports
